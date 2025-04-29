@@ -99,6 +99,28 @@ func TestIsValid(t *testing.T) {
 		}
 	})
 
+	t.Run("sensitivity to reference time", func(t *testing.T) {
+		originalRef := checker.ref
+		defer func() { checker.ref = originalRef }()
+
+		expr := "*/15, * * * *"
+		moments := []time.Time{
+			time.Date(2025, 4, 29, 12, 13, 0, 0, time.UTC),
+			time.Date(2025, 4, 29, 12, 14, 0, 0, time.UTC),
+			time.Date(2025, 4, 29, 12, 15, 0, 0, time.UTC),
+			time.Date(2025, 4, 29, 12, 16, 0, 0, time.UTC),
+			time.Date(2025, 4, 29, 12, 17, 0, 0, time.UTC),
+		}
+
+		for _, moment := range moments {
+			checker.ref = moment
+
+			if gron.IsValid(expr) {
+				t.Errorf("expected false, got true at %v", moment)
+			}
+		}
+
+	})
 }
 
 func TestAddTag(t *testing.T) {

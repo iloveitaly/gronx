@@ -41,18 +41,10 @@ For non-interactive installation (useful in CI/CD environments):
 curl -sS https://raw.githubusercontent.com/adhocore/gronx/refs/heads/main/install.sh | sh -s -- --yes
 ```
 
-The script supports various options:
-- `-b, --bin-dir`: Override the installation directory (default: `/usr/local/bin`)
-- `-v, --version`: Install a specific version (default: latest)
-- `-p, --platform`: Override detected platform
-- `-a, --arch`: Override detected architecture
-- `-f, -y, --force, --yes`: Skip confirmation prompts
-- `-h, --help`: Display help message
-
-Example with custom installation directory:
+The script supports several options including custom installation directory, version selection, and platform/architecture overrides. Use `--help` to see all available options:
 
 ```sh
-curl -sS https://raw.githubusercontent.com/adhocore/gronx/refs/heads/main/install.sh | sh -s -- --bin-dir ~/.local/bin --yes
+curl -sS https://raw.githubusercontent.com/adhocore/gronx/refs/heads/main/install.sh | sh -s -- --help
 ```
 
 ## Usage

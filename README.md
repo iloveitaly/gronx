@@ -21,8 +21,38 @@ Find gronx in [pkg.go.dev](https://pkg.go.dev/github.com/adhocore/gronx).
 
 ## Installation
 
+### As a Go library
+
 ```sh
 go get -u github.com/adhocore/gronx
+```
+
+### Using Bash install script
+
+For installing the `tasker` command-line tool, you can use the bash installation script:
+
+```sh
+curl -sS https://raw.githubusercontent.com/adhocore/gronx/refs/heads/main/install.sh | sh
+```
+
+For non-interactive installation (useful in CI/CD environments):
+
+```sh
+curl -sS https://raw.githubusercontent.com/adhocore/gronx/refs/heads/main/install.sh | sh -s -- --yes
+```
+
+The script supports various options:
+- `-b, --bin-dir`: Override the installation directory (default: `/usr/local/bin`)
+- `-v, --version`: Install a specific version (default: latest)
+- `-p, --platform`: Override detected platform
+- `-a, --arch`: Override detected architecture
+- `-f, -y, --force, --yes`: Skip confirmation prompts
+- `-h, --help`: Display help message
+
+Example with custom installation directory:
+
+```sh
+curl -sS https://raw.githubusercontent.com/adhocore/gronx/refs/heads/main/install.sh | sh -s -- --bin-dir ~/.local/bin --yes
 ```
 
 ## Usage

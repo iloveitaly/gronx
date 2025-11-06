@@ -138,11 +138,17 @@ install() {
   # extract the archive
   case "${ARCHIVE_FILE}" in
     *.tar.gz)
-      tar -xzf "${tmp_dir}/${ARCHIVE_FILE}" -C "${tmp_dir}"
+      tar -xzf "${tmp_dir}/${ARCHIVE_FILE}" -C "${tmp_dir}" --strip-components=1
       ;;
     *.zip)
       if has unzip; then
         unzip -q "${tmp_dir}/${ARCHIVE_FILE}" -d "${tmp_dir}"
+        # Find the extracted directory and move contents up
+        extracted_dir=$(find "${tmp_dir}" -mindepth 1 -maxdepth 1 -type d | head -1)
+        if [ -n "${extracted_dir}" ]; then
+          mv "${extracted_dir}"/* "${tmp_dir}/"
+          rm -rf "${extracted_dir}"
+        fi
       else
         error "unzip is required to extract the archive but was not found"
         exit 1

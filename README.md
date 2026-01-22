@@ -219,7 +219,7 @@ tasker -file path/to/taskfile
 -file string <required>
     The task file in crontab format
 -out string
-    The fullpath to file where output from tasks are sent to
+    The fullpath to file where output from tasks are sent to (defaults to stderr)
 -shell string
     The shell to use for running tasks (default "/usr/bin/bash")
 -tz string
@@ -239,6 +239,7 @@ tasker -tz America/New_York -file path/to/taskfile -shell zsh # run all tasks us
 
 > File extension of taskfile for (`-file` option) does not matter: can be any or none.
 > The directory for outfile (`-out` option) must exist, file is created by task daemon.
+> If `-out` is not provided, both tasker logs and task outputs are sent to `stderr`.
 
 > Same timezone applies for all tasks currently and it might support overriding timezone per task in future release.
 

@@ -195,6 +195,12 @@ First, just install tasker command:
 go install github.com/adhocore/gronx/cmd/tasker@latest
 ```
 
+Or, you can install using mise:
+
+```sh
+mise use github:adhocore/gronx@latest
+```
+
 Or you can also download latest prebuilt binary from [release](https://github.com/adhocore/gronx/releases/latest) for platform of your choice.
 
 Then prepare a taskfile ([example](./tests/../test/taskfile.txt)) in crontab format
@@ -235,6 +241,8 @@ tasker -tz America/New_York -file path/to/taskfile -shell zsh # run all tasks us
 > The directory for outfile (`-out` option) must exist, file is created by task daemon.
 
 > Same timezone applies for all tasks currently and it might support overriding timezone per task in future release.
+
+> [Here's an example](https://github.com/iloveitaly/dreamhost-dns-updater) of using mise + railpack to run gronx in a docker container
 
 #### Notes on Windows
 

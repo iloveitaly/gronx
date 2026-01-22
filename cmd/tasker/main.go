@@ -33,7 +33,16 @@ func main() {
 	mustParseOption()
 
 	taskr := tasker.New(opt)
-	for _, task := range tasker.MustParseTaskfile(opt) {
+	tasks := tasker.MustParseTaskfile(opt)
+
+	if opt.Verbose {
+		taskr.Log.Printf("[tasker] parsed %d tasks:", len(tasks))
+		for _, task := range tasks {
+			taskr.Log.Printf("  %s -> %s", task.Expr, task.Cmd)
+		}
+	}
+
+	for _, task := range tasks {
 		taskr.Task(task.Expr, taskr.Taskify(task.Cmd, opt))
 	}
 

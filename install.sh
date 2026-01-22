@@ -74,7 +74,7 @@ get_tmpfile() {
 # Test if a location is writable by trying to write to it. Windows does not let
 # you test writability other than by writing: https://stackoverflow.com/q/1999988
 test_writeable() {
-  path="${1:-}/test.txt"
+  path="${1:-}/.tasker_write_test_$$"
   if touch "${path}" 2>/dev/null; then
     rm "${path}"
     return 0
@@ -295,10 +295,14 @@ confirm() {
       error "Error reading from prompt (please re-run with the '--yes' option)"
       exit 1
     fi
-    if [ "$yn" != "y" ] && [ "$yn" != "yes" ]; then
-      error 'Aborting (please answer "yes" to continue)'
-      exit 1
-    fi
+    yn=$(echo "$yn" | tr '[:upper:]' '[:lower:]')
+    case "$yn" in
+      y* | j*) ;;
+      *)
+        error 'Aborting (please answer "yes" to continue)'
+        exit 1
+        ;;
+    esac
   fi
 }
 
